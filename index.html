@@ -95,7 +95,21 @@ var médicaments = {
     ]
 };
 
+//var shit = médicaments.analgésique.filter(
+    //https://riptutorial.com/javascript/example/1260/filtering-object-arrays
 
+    var médicamentFiltrer = médicaments.analgésique.filter((obj) => {
+  var flag = false;
+  Object.values(obj).forEach((val) => {
+    if(String(val).includes("Acé")) {
+      flag = true;
+      return;
+    }    
+  });
+  if(flag) return obj;
+});
+
+console.log(médicamentFiltrer);
 
 var loopThroughPillProperty; 
     
@@ -151,6 +165,7 @@ $("#select").change(function(){
 });
 
 $("#recherche").on("input", function(){
+    $("#mainContainer").empty();
     let array = [];
     let result = [];
 
