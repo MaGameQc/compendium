@@ -56,8 +56,8 @@
 
 
 
-var médicaments = {
-    analgésique : [
+var médicaments = [
+    
         {
             nomGenerique : "Acide Acétylsalicylique",
             nomCommercial : "Aspirine, Advil",
@@ -92,42 +92,23 @@ var médicaments = {
 
 
         
-    ]
-};
-
-//var shit = médicaments.analgésique.filter(
-    //https://riptutorial.com/javascript/example/1260/filtering-object-arrays
-
-    var médicamentFiltrer = médicaments.analgésique.filter((obj) => {
-  var flag = false;
-  Object.values(obj).forEach((val) => {
-    if(String(val).includes("Acé")) {
-      flag = true;
-      return;
-    }    
-  });
-  if(flag) return obj;
-});
-
-console.log(médicamentFiltrer);
-
-var loopThroughPillProperty; 
+    ];
     
-    var loopGenerique;
-    var loopCommerciale;
-    var loopClasse;
-    var loopDescription;
 
 
- generiqueListe = () => {
-    $("#mainContainer").append("<div class='row' id='rowContainer_" + i + "'> <div class='col-12 text-center' id='contentContainer_" + i + "'></div></div>");
+
+
+
+
+ generiqueListe = (i, loopGenerique, loopCommerciale, loopClasse, loopDescription) => {
+    $("#mainContainer").append("<div class='row' id='rowContainer_" + i + "'> <div class='col-12 text-center' id='contentContainer_" + i + "' style='border-bottom: 5px solid grey;'></div></div>");
     $("#contentContainer_" + i + "").append("<h5>" + loopGenerique + "<h5> ");
     $("#contentContainer_" + i + "").append(loopCommerciale + "<br>");
     $("#contentContainer_" + i + "").append(loopClasse + "<br>");
     $("#contentContainer_" + i + "").append(loopDescription + "<br>");
 }
 
-commercialeListe = () => {
+commercialeListe = (i, loopGenerique, loopCommerciale, loopClasse, loopDescription) => {
     $("#mainContainer").append("<div class='row' id='rowContainer_" + i + "'> <div class='col-12 text-center' id='contentContainer_" + i + "'></div></div>");
     $("#contentContainer_" + i + "").append("<h5>" + loopCommerciale + "<h5> ");
     $("#contentContainer_" + i + "").append(loopGenerique + "<br>");
@@ -136,16 +117,18 @@ commercialeListe = () => {
 }
 
 loopMédicaments = (genererliste) => {
-    for(i=0; i < médicaments.analgésique.length; i++){
-     loopThroughPillProperty = Object.values(médicaments.analgésique[i]); 
-    
-     loopGenerique =  loopThroughPillProperty[0];
-     loopCommerciale =  loopThroughPillProperty[1];
-     loopClasse =  loopThroughPillProperty[2];
-     loopDescription =  loopThroughPillProperty[3];
-        genererliste();
+    for(i=0; i < médicaments.length; i++){
+     let loopThroughPillProperty = Object.values(médicaments[i]); 
+     
+     let loopGenerique =  loopThroughPillProperty[0];
+     let loopCommerciale =  loopThroughPillProperty[1];
+     let loopClasse =  loopThroughPillProperty[2];
+     let loopDescription =  loopThroughPillProperty[3];
+        genererliste(i, loopGenerique, loopCommerciale, loopClasse, loopDescription);
 }
 }
+
+
 
 loopMédicaments(generiqueListe);
 
@@ -153,7 +136,7 @@ loopMédicaments(generiqueListe);
 
 $("#select").change(function(){
     $("#mainContainer").empty();
-    for(i=0; i < médicaments.analgésique.length; i++){
+    for(i=0; i < médicaments.length; i++){
     if($("#select").val() == "generique"){
         loopMédicaments(generiqueListe);
     }
@@ -166,20 +149,45 @@ $("#select").change(function(){
 
 $("#recherche").on("input", function(){
     $("#mainContainer").empty();
-    let array = [];
-    let result = [];
 
-    for(i = 0; i < médicaments.analgésique.length-1; i++){
-    array.push(Object.values(médicaments.analgésique[i]));
+
+
+    //https://riptutorial.com/javascript/example/1260/filtering-object-arrays
+
+    var médicamentFiltrer = médicaments.filter((obj) => {
+  var isTheSame = false;
+  Object.values(obj).forEach((val) => {
+    if(String(val).toLowerCase().includes($("#recherche").val().toLowerCase())) {
+        isTheSame = true;
+      return;
+    }    
+  });
+  if(isTheSame) return obj;
+});
+
+
+
+for(i = 0; i < médicamentFiltrer.length; i++){
+    console.log("filteredMx valeur ----- " + Object.values(médicamentFiltrer[i]));
+    let storeResultInArray = [];
+
+
+    storeResultInArray = Object.values(médicamentFiltrer[i]);
+
+    console.log("result ***** " + storeResultInArray[1]);
+
     
-    console.log(array[i][0].includes("Aci"));
-    array[i][0].includes("Aci") == true ? console.log("yes " + array[i]) : alert("false");
-    if(array[i][0].includes("Aci") == true){
-        $("body").append(array[i]);
-    }
+        let loopGenerique = storeResultInArray[0];
+        let loopCommerciale = storeResultInArray[1];
+        let loopClasse = storeResultInArray[2];
+        let loopDescription = storeResultInArray[3];
+
+        $("#select").val() == "generique" ? generiqueListe(i, loopGenerique, loopCommerciale, loopClasse, loopDescription) : commercialeListe(i, loopGenerique, loopCommerciale, loopClasse, loopDescription);
+        
+}
     
+
     
-    }
 
 
 });
