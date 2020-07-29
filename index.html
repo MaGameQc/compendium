@@ -11,8 +11,19 @@
     <title>compendium</title>
   </head>
   <body>
+
+    <label for="cars">choisir catégorie de liste</label>
+
+<select  id="select">
+  <option value="generique">Générique</option>
+  <option value="commerciale">Commerciale</option>
+</select>
+<br>
+<label>rechercher : </label>
+<input type="text" id="recherche">
       
 <div class="container" id="mainContainer">
+
 
     
 <div class="row">
@@ -25,14 +36,7 @@
 </div>
 </div>
 
-<label for="cars">choisir catégorie de liste</label>
 
-<select  id="select">
-  <option value="generique">Générique</option>
-  <option value="commerciale">Commerciale</option>
-</select>
-
-<input type="text" id="recherche">
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -60,41 +64,132 @@ var médicaments = [
     
         {
             nomGenerique : "Acide Acétylsalicylique",
-            nomCommercial : "Aspirine, Advil",
-            Classe : "Analgésique",
-            Description : "bla bla bla bla"
+            nomCommercial : "Aspirine, Advil, Aspirine",
+            Classe : "Analgésique, Antiinflammatoire, Antipyrétique, Antiplaquettaire",
+            Description : "Fièvre"
         },
         {
             nomGenerique : "Abacavir",
             nomCommercial : "Ziagen",
             Classe : "Antirétroviral",
-            Description : "bla bla bla bla"
+            Description : "Virus immunodéficience humaine (VIH)"
         },
         {
             nomGenerique : "Abatacept",
             nomCommercial : "Orencia",
             Classe : "Antirhumatismal",
-            Description : "bla bla bla bla"
+            Description : "Arthrite Rhumatoïde"
         },
         {
-            nomGenerique : "Abelcet",
-            nomCommercial : "Amphotéricine B Liposomale",
+            nomGenerique : "Amphotéricine B Liposomale",
+            nomCommercial : "Abelcet",
             Classe : "Antifongique",
-            Description : "bla bla bla bla"
+            Description : "Antifongique"
         },
         {
             nomGenerique : "Acétaminophène",
             nomCommercial : "Abenol, tylenol",
+            Classe : "Analgésique, Antipyrétique",
+            Description : "Analgésique, Fièvre"
+        },
+        {
+            nomGenerique : "Aripiprazole",
+            nomCommercial : "Abilify",
+            Classe : "Antipsychotique",
+            Description : "Dépression , trouble bipolaire"
+        },
+        {
+            nomGenerique : "Abiraterone",
+            nomCommercial : "Zytiga",
+            Classe : "Antiandrogène",
+            Description : "Cancer de la prostate"
+        },
+        {
+            nomGenerique : "Paclitaxel",
+            nomCommercial : "Abraxane",
+            Classe : "Antinéoplasique",
+            Description : "Antinéoplasique"
+        },
+        {
+            nomGenerique : "Fentanyl",
+            nomCommercial : "Abstral",
+            Classe : "Opioïde , Analgésique",
+            Description : "Analgésique"
+        },
+        {
+            nomGenerique : "Acamprosate",
+            nomCommercial : "Campral",
+            Classe : "non disponible",
+            Description : "Sevrage d'alcool"
+        },
+        {
+            nomGenerique : "Acarbose",
+            nomCommercial : "Glucobay",
             Classe : "Analgésique",
             Description : "bla bla bla bla"
-        }
+        },
+        {
+            nomGenerique : "Zafirlukast",
+            nomCommercial : "Accolate",
+            Classe : "Anti-inflammatoire, Inhibiteur des récepteurs leukotriene",
+            Description : "Asthme"
+        },
+        {
+            nomGenerique : "Quinapril",
+            nomCommercial : "Accupril",
+            Classe : "inhibiteur de l'enzyme de conversion de l'angiotensine , Antihypertenseur",
+            Description : "hypertension artérielle, insuffisance cardiaque"
+        },
+        {
+            nomGenerique : "Quinapril / Hydrochlorothiazide (HCTZ)",
+            nomCommercial : "Accuretic",
+            Classe : "inhibiteur de l'enzyme de convedrsion de l'angiotensine, Diurétique",
+            Description : "Hypertension Artérielle, Insuffisance Cardiaque"
+        },
+        {
+            nomGenerique : "Isotrétinoïne",
+            nomCommercial : "Accutane",
+            Classe : "Antiacné, Rétinoïde",
+            Description : "Traitement d'acné sévère"
+        },
+        {
+            nomGenerique : "Acébutolol",
+            nomCommercial : "acébutolol, Monitan, Rhotral, Sectral",
+            Classe : "Bêta-bloquant",
+            Description : "Hypertension Artérielle, Angine, Antiarythmique"
+        },
+        {
+            nomGenerique : "Acétaminophène + Codéine",
+            nomCommercial : "Empracet",
+            Classe : "Analgésique, antipyrétique",
+            Description : "Analgésique, Fièvre, Toux"
+        },
+
         
 
 
         
     ];
     
+    // function Médicament(nomGenerique, nomCommercial, Classe, Description){
+    //     this.nomGenerique = nomGenerique;
+    //     this.nomCommercial = nomCommercial;
+    //     this.Classe = Classe;
+    //     this.Description = Description;
 
+    //     this.storeInArray = function(){
+    //         let object = {
+    //             nomGenerique : nomGenerique,
+    //             nomCommercial : nomCommercial,
+    //             Classe : Classe,
+    //             Description : Description
+    //         };
+    //         médicaments.push(object);
+    //     }
+    // }
+
+    // new Médicament("as;lkfsalfd", "a;lsdkjfsal;fj", "aaaaaaaaaaaaa", "bbbbbbbbbbbb").storeInArray();
+    // new Médicament("shit", "shit", "aaaaaaaaaaaaa", "bbbbbbbbbbbb").storeInArray();
 
 
 
@@ -109,7 +204,7 @@ var médicaments = [
 }
 
 commercialeListe = (i, loopGenerique, loopCommerciale, loopClasse, loopDescription) => {
-    $("#mainContainer").append("<div class='row' id='rowContainer_" + i + "'> <div class='col-12 text-center' id='contentContainer_" + i + "'></div></div>");
+    $("#mainContainer").append("<div class='row' id='rowContainer_" + i + "'> <div class='col-12 text-center' id='contentContainer_" + i + "' style='border-bottom: 5px solid grey;'></div></div>");
     $("#contentContainer_" + i + "").append("<h5>" + loopCommerciale + "<h5> ");
     $("#contentContainer_" + i + "").append(loopGenerique + "<br>");
     $("#contentContainer_" + i + "").append(loopClasse + "<br>");
